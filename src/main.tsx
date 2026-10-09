@@ -1,3 +1,12 @@
 import { createRoot } from 'react-dom/client';
+import '@fontsource/inter/400.css'; import '@fontsource/inter/700.css'; import '@fontsource/inter/900.css';
+import '@fontsource/cairo/400.css'; import '@fontsource/cairo/700.css'; import '@fontsource/cairo/900.css';
+import '@fontsource/tajawal/400.css'; import '@fontsource/tajawal/700.css'; import '@fontsource/tajawal/900.css';
+import '@fontsource/amiri/400.css'; import '@fontsource/amiri/700.css';
+import '@fontsource/reem-kufi/400.css'; import '@fontsource/reem-kufi/700.css';
+import '@fontsource/montserrat/400.css'; import '@fontsource/montserrat/700.css'; import '@fontsource/montserrat/900.css';
+import '@fontsource/playfair-display/400.css'; import '@fontsource/playfair-display/700.css'; import '@fontsource/playfair-display/900.css';
+import '@fontsource/bebas-neue/400.css';
+import './styles.css';
 import { App } from './App.tsx';
 createRoot(document.getElementById('root')!).render(<App />);

@@ -6,6 +6,7 @@ export interface Brief {
   lighting?: string; background?: string; style?: string; composition?: string;
   palette?: string[]; exactText?: string[]; exclude?: string[];
   identityLock?: boolean; retouch?: Retouch; model: Model;
+  typography?: string; retouchTasks?: string[]; preserve?: string[];
 }
 export interface Conflict { id: string; severity: 'high' | 'low'; message: string; fix: string }
 export interface Result {
@@ -60,8 +61,10 @@ export function build(b: Brief): Result {
   if (clean(b.composition)) s['Composition'] = clean(b.composition);
   if (clean(b.style)) s['Style'] = clean(b.style);
   if (b.palette?.length) s['Color palette'] = b.palette.join(', ');
+  if (clean(b.typography)) s['Typography'] = clean(b.typography);
   if (b.exactText?.length) s['Exact text'] = 'Render this text exactly, character for character, add no other words: ' + b.exactText.map(t => `"${t}"`).join(' | ');
-  if (b.retouch) s['Retouching'] = `${b.retouch} natural retouch; keep realistic skin texture and pores, no smoothing.`;
+  if (b.retouch) s['Retouching'] = `${b.retouch} natural retouch; keep realistic skin texture and pores, no smoothing.`
+    + (b.retouchTasks?.length ? ` Tasks: ${b.retouchTasks.join(', ')}.` : '') + (b.preserve?.length ? ` Preserve unchanged: ${b.preserve.join(', ')}.` : '');
   const negs = negativeFor(b);
   let prompt: string, negative = negs.join(', ');
   const body = Object.entries(s);
