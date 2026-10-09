@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { build, detectConflicts, variations, score, hasArabic } from '../src/engine/engine.ts';
+const base = { text: 'بورتريه طبيعي بالموبايل بدقن مهذبة وملامح محفوظة', ratio: '4:5', model: 'generic' as const };
+test('Arabic brief preserved verbatim', () => { const r = build(base); assert.ok(r.prompt.includes(base.text)); assert.ok(hasArabic(r.sections['Creative brief'])); });
+test('exact text quoted untouched', () => { const r = build({ ...base, exactText: ['أ. محمد عادل', 'Math 2026'] }); assert.ok(r.prompt.includes('"أ. محمد عادل"') && r.prompt.includes('"Math 2026"')); });
+test('conflict: close framing + full body', () => { assert.equal(detectConflicts({ ...base, framing: 'close-up', pose: 'walking full-body' })[0].id, 'framing-pose'); });
+test('conflict: identity lock + strong retouch', () => { assert.ok(detectConflicts({ ...base, identityLock: true, retouch: 'strong' }).some(c => c.id === 'identity-retouch')); });
+test('invalid ratio flagged', () => { assert.ok(detectConflicts({ ...base, ratio: 'abc' }).some(c => c.id === 'ratio')); });
+test('midjourney uses --ar/--no', () => { const r = build({ ...base, model: 'midjourney' }); assert.ok(/--ar 4:5 --no /.test(r.prompt)); assert.equal(r.negative, ''); });
+test('openai inlines exclusions', () => { const r = build({ ...base, model: 'openai' }); assert.ok(r.prompt.includes('Avoid:')); assert.equal(r.negative, ''); });
+test('negative prompt is contextual', () => { assert.ok(!build(base).negative.includes('extra fingers')); assert.ok(build({ ...base, pose: 'seated' }).negative.includes('extra fingers')); });
+test('score deterministic and drops with conflicts', () => { const b = { ...base, framing: 'close-up', pose: 'walking' }; const a = build(b).score.total; assert.equal(a, build(b).score.total); assert.ok(a < build({ ...b, pose: 'seated' }).score.total); });
+test('variations keep locked fields, differ in style', () => { const v = variations({ ...base, exactText: ['Hello'], clothing: 'navy suit', identityLock: true }); assert.equal(v.length, 3); assert.ok(v.every(x => x.result.prompt.includes('"Hello"') && x.result.prompt.includes('navy suit'))); assert.equal(new Set(v.map(x => x.result.sections['Style'])).size, 3); });
+test('score bounded', () => { const s = score(base, []); assert.ok(s.total >= 0 && s.total <= 100); });
