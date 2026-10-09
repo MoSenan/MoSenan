@@ -9,6 +9,7 @@ const P = {
   status: 'M9 12l2 2 4-4 M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z',
   copy: 'M9 9h11v11H9z M5 15H4V4h11v1',
   alert: 'M12 9v4 M12 17h.01 M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z',
+  social: 'M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z M12 18h.01',
   check: 'M20 6L9 17l-5-5',
 } as const;
 export type IconName = keyof typeof P;

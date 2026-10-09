@@ -10,14 +10,3 @@ export const BACKGROUNDS = [o('clean seamless studio backdrop', 'خلفية اس
 export const STYLES = [o('minimalist editorial', 'تحريري بسيط'), o('premium luxury advertising', 'إعلان فاخر'), o('cinematic portraiture', 'بورتريه سينمائي'), o('modern educational design', 'تعليمي عصري'), o('bold typography-led design', 'تيبوغرافي جريء'), o('natural lifestyle photography', 'لايف ستايل'), o('futuristic technology design', 'تقني مستقبلي'), o('corporate branding', 'هوية مؤسسية')];
 export const RETOUCH_TASKS = [o('natural blemish cleanup', 'تنظيف الشوائب'), o('under-eye refinement', 'تحسين تحت العين'), o('eye and eyebrow detail enhancement', 'تحسين العين والحواجب'), o('hair refinement and stray hair cleanup', 'تحسين الشعر'), o('beard shaping and definition', 'تحديد اللحية'), o('realistic sharpening without halos', 'حدة واقعية'), o('white balance correction', 'ضبط توازن الأبيض'), o('shadow and highlight recovery', 'استرجاع الظلال'), o('professional color grading', 'تدرج لوني احترافي'), o('background cleanup', 'تنظيف الخلفية')];
 export const PRESERVE = [o('facial identity', 'ملامح الوجه'), o('skin texture and pores', 'ملمس البشرة'), o('hair characteristics', 'الشعر'), o('beard characteristics', 'اللحية'), o('clothing', 'الملابس'), o('body proportions', 'نسب الجسم'), o('pose', 'الوضعية'), o('original lighting direction', 'اتجاه الإضاءة'), o('composition', 'التكوين')];
-export interface FontOpt { id: string; en: string; ar: string; css: string; cat: string; arabic: boolean }
-export const FONTS: FontOpt[] = [
-  { id: 'cairo', en: 'Cairo', ar: 'القاهرة', css: "'Cairo'", cat: 'Arabic geometric sans-serif', arabic: true },
-  { id: 'tajawal', en: 'Tajawal', ar: 'تجوال', css: "'Tajawal'", cat: 'Arabic modern sans-serif', arabic: true },
-  { id: 'amiri', en: 'Amiri', ar: 'أميري', css: "'Amiri'", cat: 'Arabic editorial serif (Naskh)', arabic: true },
-  { id: 'reem', en: 'Reem Kufi', ar: 'ريم كوفي', css: "'Reem Kufi'", cat: 'Arabic Kufi-inspired display', arabic: true },
-  { id: 'inter', en: 'Inter', ar: 'إنتر', css: "'Inter'", cat: 'neo-grotesque sans-serif', arabic: false },
-  { id: 'montserrat', en: 'Montserrat', ar: 'مونتسيرات', css: "'Montserrat'", cat: 'geometric sans-serif', arabic: false },
-  { id: 'playfair', en: 'Playfair Display', ar: 'بلايفير', css: "'Playfair Display'", cat: 'editorial high-contrast serif', arabic: false },
-  { id: 'bebas', en: 'Bebas Neue', ar: 'بيبَس', css: "'Bebas Neue'", cat: 'condensed advertising display', arabic: false },
-];

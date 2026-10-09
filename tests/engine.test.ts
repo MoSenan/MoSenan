@@ -15,3 +15,4 @@ test('variations keep locked fields, differ in style', () => { const v = variati
 test('score bounded', () => { const s = score(base, []); assert.ok(s.total >= 0 && s.total <= 100); });
 test('retouch tasks and preserve list reach the prompt', () => { const r = build({ ...base, retouch: 'light', retouchTasks: ['blemish cleanup'], preserve: ['skin texture'] }); assert.ok(r.prompt.includes('blemish cleanup') && r.prompt.includes('Preserve unchanged: skin texture')); });
 test('typography section included', () => { assert.ok(build({ ...base, typography: 'Cairo bold' }).prompt.includes('Cairo bold')); });
+test('design type and objective included', () => { const r = build({ ...base, kind: 'Cover image', goal: 'Student registration' }); assert.ok(r.prompt.includes('Cover image') && r.prompt.includes('Student registration')); });

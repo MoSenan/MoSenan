@@ -6,7 +6,7 @@ export interface Brief {
   lighting?: string; background?: string; style?: string; composition?: string;
   palette?: string[]; exactText?: string[]; exclude?: string[];
   identityLock?: boolean; retouch?: Retouch; model: Model;
-  typography?: string; retouchTasks?: string[]; preserve?: string[];
+  typography?: string; kind?: string; goal?: string; retouchTasks?: string[]; preserve?: string[];
 }
 export interface Conflict { id: string; severity: 'high' | 'low'; message: string; fix: string }
 export interface Result {
@@ -49,6 +49,8 @@ export function build(b: Brief): Result {
   const brief = clean(b.text);
   s['Creative brief'] = hasArabic(brief) ? `Original brief (verbatim, Arabic preserved): ${brief}` : brief;
   if (hasArabic(brief)) notes.push('Arabic brief kept verbatim. Translation needs an AI provider; local mode never rewrites your wording.');
+  if (clean(b.kind)) s['Design type'] = clean(b.kind);
+  if (clean(b.goal)) s['Objective'] = clean(b.goal);
   if (clean(b.subject)) s['Main subject'] = clean(b.subject);
   if (b.identityLock) s['Identity constraints'] = "Preserve the reference subject's recognizable facial structure and identity as far as the model supports; do not alter face proportions, hairstyle or beard unless stated.";
   if (clean(b.clothing)) s['Clothing'] = clean(b.clothing);
